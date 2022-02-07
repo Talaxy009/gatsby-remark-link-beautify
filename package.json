@@ -1,0 +1,33 @@
+{
+  "name": "gatsby-remark-link-beautify",
+  "version": "1.0.0",
+  "description": "A gatsby plugin to beautify links by previewing them",
+  "main": "src/index.js",
+  "scripts": {
+    "link": "yarn link",
+    "publish": "yarn publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Talaxy009/gatsby-remark-link-beautify.git"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "remark",
+    "link",
+    "preview",
+    "card",
+    "beautify"
+  ],
+  "author": "Talaxy009",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Talaxy009/gatsby-remark-link-beautify/issues"
+  },
+  "homepage": "https://github.com/Talaxy009/gatsby-remark-link-beautify#readme",
+  "dependencies": {
+    "puppeteer": "^13.1.3",
+    "unist-util-visit": "^2.0.3"
+  }
+}
