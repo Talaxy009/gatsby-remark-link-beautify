@@ -9,11 +9,11 @@ A gatsby plugin to beautify links by previewing them.
 This plugin has two main features:
 
 - It adds a screenshot of the link's target page to the link's tooltip. When hovering over the link it will show the screenshot.
-- It embeds card with the link's target website information in the page. It only does this in the situation [below](#LinkPreview).
+- It embeds card with the link's target website information in the page. It only does this in the situation [below](#LinkCard).
 
 The example below are using the `twitter-card` themes.
 
-![example](./assets/example.gif)
+![example](https://github.com/Talaxy009/gatsby-remark-link-beautify/raw/main/assets/example.gif)
 
 ## Installation
 
