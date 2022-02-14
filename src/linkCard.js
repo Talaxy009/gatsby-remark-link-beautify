@@ -68,7 +68,6 @@ const getPageData = async (browser, url, options) => {
  */
 const getHTML = (pageData, showFavicon) => {
 	const {title, description, favicon, url, ogImage} = pageData;
-    console.log(typeof showFavicon);
 
 	return `
     <div>
