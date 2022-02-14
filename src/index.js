@@ -13,7 +13,7 @@ module.exports = async ({cache, markdownAST}, pluginOption) => {
 	const options = {...defaultOption, ...pluginOption};
 	const {delimiter, showFavicon} = options;
 	const browser = await puppeteer.launch();
-	const targets = [];
+	const promises = [];
 
 	visit(markdownAST, 'link', (node) => {
 		const {url, value = url} = node;
@@ -22,29 +22,32 @@ module.exports = async ({cache, markdownAST}, pluginOption) => {
 			return;
 		}
 
-		targets.push(async () => {
-			let html = await cache.get(urlString);
+		promises.push(
+			new Promise(async (resolve) => {
+				let html = await cache.get(urlString);
 
-			if (!html) {
-				if (isLinkCard(node, delimiter)) {
-					const data = await getPageData(browser, url, options);
-					html = getCardHTML(data, showFavicon);
-				} else {
-					// prettier-ignore
-					const screenshot = await getPageScreenshot(browser, url, options);
-					html = getPreviewHTML(node, screenshot);
+				if (!html) {
+					if (isLinkCard(node, delimiter)) {
+						const data = await getPageData(browser, url, options);
+						html = getCardHTML(data, showFavicon);
+					} else {
+						// prettier-ignore
+						const screenshot = await getPageScreenshot(browser, url, options);
+						html = getPreviewHTML(node, screenshot);
+					}
+					await cache.set(urlString, html);
 				}
-				await cache.set(urlString, html);
-			}
 
-			node.type = 'html';
-			node.value = html;
-			node.children = undefined;
-		});
+				node.type = 'html';
+				node.value = html;
+				node.children = undefined;
+				resolve();
+			}),
+		);
 	});
 
 	try {
-		await Promise.all(targets.map((t) => t()));
+		await Promise.all(promises);
 	} catch (e) {
 		console.error(e);
 	} finally {
