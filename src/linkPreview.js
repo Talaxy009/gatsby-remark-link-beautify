@@ -42,7 +42,7 @@ const getHTML = (node, screenshot) => {
     	<a target="_blank" rel="noopener noreferrer" href="${url}">
         	${children[0].value}
     	</a>
-		${screenshot && `<img src="data:image/png;base64,${screenshot}" />`}
+		${screenshot && `<img src="data:image/jpeg;base64,${screenshot}" />`}
     </span>
   `.trim();
 };
