@@ -2,10 +2,12 @@ const visit = require('unist-util-visit');
 const puppeteer = require('puppeteer');
 
 const {getHTML: getCardHTML, getPageData} = require('./linkCard');
-const {getHTML: getPreviewHTML,getPageScreenshot} = require('./linkPreview');
+const {getHTML: getPreviewHTML, getPageScreenshot} = require('./linkPreview');
 const {isValidLink, isLinkCard, getUrlString} = require('./utils');
 
 const defaultOption = require('../shared/defaultOption');
+
+require('events').setMaxListeners(0);
 
 module.exports = async ({cache, markdownAST}, pluginOption) => {
 	const options = {...defaultOption, ...pluginOption};
