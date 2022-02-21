@@ -1,6 +1,6 @@
 {
   "name": "gatsby-remark-link-beautify",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A gatsby plugin to beautify links by previewing them",
   "main": "src/index.js",
   "scripts": {
