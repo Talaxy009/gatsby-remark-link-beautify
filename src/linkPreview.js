@@ -10,6 +10,7 @@ const puppeteer = require('puppeteer');
 const getPageScreenshot = async (page, url, options) => {
 	try {
 		await page.goto(url);
+		await page.waitForTimeout(2000);
 		const screenshot = await page.screenshot({
 			type: 'jpeg',
 			quality: options.screenshotQuality,
