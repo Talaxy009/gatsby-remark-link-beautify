@@ -107,6 +107,7 @@ Then the plugin will embed a card with the link's target website information in 
 | `timeout`           | `number`  | 30000   | Default timeout(ms) for puppeteer  |
 | `screenshotQuality` | `number`  | 80      | The quality of the screenshot in % |
 | `showFavicon`       | `boolean` | true    | Whether to show the favicon or not |
+| `clusterSize`       | `number`  | 2       | Maximal number of parallel workers |
 | `error`             | `Object`  | -       | Default config when error          |
 
 ## Inspiration
