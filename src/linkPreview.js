@@ -2,15 +2,12 @@ const puppeteer = require('puppeteer');
 
 /**
  * get page data from url by puppeteer
- * @param {puppeteer.Browser} browser puppeteer browser object
+ * @param {puppeteer.Page} page puppeteer page object
  * @param {string} url the url to be fetched
  * @param {object} options options
  * @returns screenshot image in base64
  */
-const getPageScreenshot = async (browser, url, options) => {
-	const page = await browser.newPage();
-	page.setDefaultNavigationTimeout(options.timeout);
-
+const getPageScreenshot = async (page, url, options) => {
 	try {
 		await page.goto(url);
 		const screenshot = await page.screenshot({
@@ -23,8 +20,6 @@ const getPageScreenshot = async (browser, url, options) => {
 	} catch (e) {
 		console.error(`Cannot get screenshot from ${url}`);
 		return '';
-	} finally {
-		await page.close();
 	}
 };
 

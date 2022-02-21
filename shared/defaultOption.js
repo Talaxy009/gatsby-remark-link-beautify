@@ -6,6 +6,7 @@ const defaultOption = {
 	timeout: DEFAULT_TIMEOUT,
 	screenshotQuality: DEFAULT_SCREENSHOT_QUALITY,
 	showFavicon: true,
+	clusterSize: 2,
 	error: {
 		title: 'Not Found Site',
 	},

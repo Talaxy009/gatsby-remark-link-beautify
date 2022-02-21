@@ -4,12 +4,12 @@ const {fetchData, getDataValue} = require('./utils');
 
 /**
  * get page data from url by puppeteer
- * @param {puppeteer.Browser} browser puppeteer browser object
+ * @param {puppeteer.Page} page puppeteer page object
  * @param {string} url the url to be fetched
  * @param {object} options options
  * @returns page data
  */
-const getPageData = async (browser, url, options) => {
+const getPageData = async (page, url, options) => {
 	const Default = {
 		title: options.error.title,
 		description: '',
@@ -18,8 +18,6 @@ const getPageData = async (browser, url, options) => {
 		ogImage: '',
 		url,
 	};
-	const page = await browser.newPage();
-	page.setDefaultNavigationTimeout(options.timeout);
 
 	try {
 		await page.goto(url);
@@ -55,8 +53,6 @@ const getPageData = async (browser, url, options) => {
 	} catch (e) {
 		console.error(`Cannot get page data from ${url}`);
 		return Default;
-	} finally {
-		await page.close();
 	}
 };
 

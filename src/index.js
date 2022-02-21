@@ -1,5 +1,5 @@
 const visit = require('unist-util-visit');
-const puppeteer = require('puppeteer');
+const {Cluster} = require('puppeteer-cluster');
 
 const {getHTML: getCardHTML, getPageData} = require('./linkCard');
 const {getHTML: getPreviewHTML, getPageScreenshot} = require('./linkPreview');
@@ -11,9 +11,33 @@ require('events').setMaxListeners(0);
 
 module.exports = async ({cache, markdownAST}, pluginOption) => {
 	const options = {...defaultOption, ...pluginOption};
-	const {delimiter, showFavicon} = options;
-	const browser = await puppeteer.launch();
-	const promises = [];
+	const {delimiter, showFavicon, clusterSize, timeout} = options;
+	const cluster = await Cluster.launch({
+		concurrency: Cluster.CONCURRENCY_CONTEXT,
+		maxConcurrency: clusterSize,
+		timeout: timeout,
+	});
+
+	await cluster.task(async ({page, data}) => {
+		const {node, url} = data;
+		let html = await cache.get(url);
+
+		if (!html) {
+			if (isLinkCard(node, delimiter)) {
+				const data = await getPageData(page, url, options);
+				html = getCardHTML(data, showFavicon);
+			} else {
+				// prettier-ignore
+				const screenshot = await getPageScreenshot(page, url, options);
+				html = getPreviewHTML(node, screenshot);
+			}
+			await cache.set(url, html);
+		}
+
+		node.type = 'html';
+		node.value = html;
+		node.children = undefined;
+	});
 
 	visit(markdownAST, 'link', (node) => {
 		const {url, value = url} = node;
@@ -22,36 +46,10 @@ module.exports = async ({cache, markdownAST}, pluginOption) => {
 			return;
 		}
 
-		promises.push(
-			new Promise(async (resolve) => {
-				let html = await cache.get(urlString);
-
-				if (!html) {
-					if (isLinkCard(node, delimiter)) {
-						const data = await getPageData(browser, url, options);
-						html = getCardHTML(data, showFavicon);
-					} else {
-						// prettier-ignore
-						const screenshot = await getPageScreenshot(browser, url, options);
-						html = getPreviewHTML(node, screenshot);
-					}
-					await cache.set(urlString, html);
-				}
-
-				node.type = 'html';
-				node.value = html;
-				node.children = undefined;
-				resolve();
-			}),
-		);
+		cluster.queue({node, url: urlString});
 	});
 
-	try {
-		await Promise.all(promises);
-	} catch (e) {
-		console.error(e);
-	} finally {
-		await browser.close();
-		return markdownAST;
-	}
+	await cluster.idle();
+	await cluster.close();
+	return markdownAST;
 };
