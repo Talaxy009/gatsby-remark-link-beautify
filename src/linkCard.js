@@ -51,7 +51,7 @@ const getPageData = async (page, url, options) => {
 			favicon,
 		};
 	} catch (e) {
-		console.error(`Cannot get page data from ${url}`);
+		console.error(`Unable to get page data from ${url}`);
 		return Default;
 	}
 };

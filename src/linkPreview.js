@@ -19,7 +19,7 @@ const getPageScreenshot = async (page, url, options) => {
 
 		return screenshot;
 	} catch (e) {
-		console.error(`Cannot get screenshot from ${url}`);
+		console.error(`Unable to get screenshot from ${url}`);
 		return '';
 	}
 };
