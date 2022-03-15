@@ -36,12 +36,12 @@ This plugin requires `gatsby-transformer-remark`.
     ```js
     // In your gatsby-config.js
     plugins: [
-     {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-       plugins: [`gatsby-remark-link-beautify`],
-      },
-     },
+        {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [`gatsby-remark-link-beautify`],
+            },
+        },
     ];
     ```
 
@@ -50,19 +50,19 @@ This plugin requires `gatsby-transformer-remark`.
     ```js
     // In your gatsby-config.js
     plugins: [
-     {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-       plugins: [
         {
-         resolve: `gatsby-remark-link-beautify`,
-         options: {
-          // your options here
-         },
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [
+                    {
+                        resolve: `gatsby-remark-link-beautify`,
+                        options: {
+                            // your options here
+                        },
+                    },
+                ],
+            },
         },
-       ],
-      },
-     },
     ];
     ```
 
@@ -101,14 +101,20 @@ Then the plugin will embed a card with the link's target website information in 
 
 ## Options
 
-| Property            | Type      | Default | Description                        |
-| ------------------- | --------- | ------- | ---------------------------------- |
-| `delimiter`         | `string`  | `$card` | Title of the link to create a card |
-| `timeout`           | `number`  | 30000   | Default timeout(ms) for puppeteer  |
-| `screenshotQuality` | `number`  | 80      | The quality of the screenshot in % |
-| `showFavicon`       | `boolean` | true    | Whether to show the favicon or not |
-| `clusterSize`       | `number`  | 2       | Maximal number of parallel workers |
-| `error`             | `Object`  | -       | Default config when error          |
+| Name              | Type      | Default                     | Description                        |
+| ----------------- | --------- | --------------------------- | ---------------------------------- |
+| delimiter         | `string`  | `$card`                     | Title of the link to create a card |
+| timeout           | `number`  | `30000`                     | Default timeout(ms) for puppeteer  |
+| screenshotQuality | `number`  | `80`                        | The quality of the screenshot in % |
+| showFavicon       | `boolean` | `true`                      | Whether to show the favicon or not |
+| clusterSize       | `number`  | `2`                         | Maximal number of parallel workers |
+| error             | `object`  | `{title: 'Not Found Site'}` | Default config when error          |
+
+## Troubleshooting
+
+### sharp
+
+After `1.2.0`, this plugin will use the [sharp](https://github.com/lovell/sharp) to resize screenshots. According to the [gatsby-plugin-sharp documentation](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting), it might cause some issues when there are multiple incompatible versions of the `sharp` dependency in different packages. If you encounter such issues, please update the dependencies according to the official documentation mentioned above.
 
 ## Inspiration
 
