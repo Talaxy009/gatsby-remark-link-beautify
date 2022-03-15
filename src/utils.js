@@ -1,3 +1,5 @@
+const sharp = require('sharp');
+
 /**
  * build promise object from puppeteer's method
  * @param {Promise} promise puppeteer's method
@@ -50,10 +52,22 @@ const getUrlString = (url) => {
     }
 };
 
+/**
+ * resize image
+ * @param {Buffer} img image buffer
+ * @param {number} width width of image after resize
+ * @param {number} quality quality of the image in %
+ * @returns image buffer
+ */
+const imgResize = (img, width, quality) => {
+    return sharp(img).resize(width).webp({quality: quality}).toBuffer();
+};
+
 module.exports = {
     fetchData,
     getDataValue,
     isValidLink,
     isLinkCard,
     getUrlString,
+    imgResize,
 };

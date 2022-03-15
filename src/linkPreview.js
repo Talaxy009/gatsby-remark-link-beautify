@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const {imgResize} = require('./utils');
 
 /**
  * get page data from url by puppeteer
@@ -11,13 +12,11 @@ const getPageScreenshot = async (page, url, options) => {
     try {
         await page.goto(url);
         await page.waitForTimeout(2000);
-        const screenshot = await page.screenshot({
-            type: 'jpeg',
-            quality: options.screenshotQuality,
-            encoding: 'base64',
-        });
+        const screenshot = await page.screenshot();
 
-        return screenshot;
+        const img = await imgResize(screenshot, 400, options.screenshotQuality);
+
+        return img.toString('base64');
     } catch (e) {
         console.error(`Unable to get screenshot from ${url}`);
         return '';
@@ -35,10 +34,13 @@ const getHTML = (node, screenshot) => {
 
     return `
     <span class="link-preview-container">
-    	<a target="_blank" rel="noopener noreferrer" href="${url}">
-        	${children[0].value}
-    	</a>
-		${screenshot && `<img src="data:image/jpeg;base64,${screenshot}" />`}
+        <a target="_blank" rel="noopener noreferrer" href="${url}">
+            ${children[0].value}
+        </a>
+		${
+            screenshot &&
+            `<img src="data:image/webp;base64,${screenshot}" />`
+        }
     </span>`.trim();
 };
 
