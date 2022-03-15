@@ -4,9 +4,9 @@
  * @returns promise object
  */
 const fetchData = (promise) =>
-	promise
-		.then((value) => ({done: true, value}))
-		.catch((error) => Promise.resolve({done: false, error}));
+    promise
+        .then((value) => ({done: true, value}))
+        .catch((error) => Promise.resolve({done: false, error}));
 
 /**
  * get value from data or default value
@@ -15,7 +15,7 @@ const fetchData = (promise) =>
  * @returns data value or default value
  */
 const getDataValue = (data, fallback) => {
-	return data.done ? data.value : fallback;
+    return data.done ? data.value : fallback;
 };
 
 /**
@@ -23,11 +23,7 @@ const getDataValue = (data, fallback) => {
  * @param {object} node link node
  */
 const isValidLink = (node) => {
-	return (
-		node.url &&
-		node.children[0] &&
-		node.children[0].type === 'text'
-	);
+    return node.url && node.children[0] && node.children[0].type === 'text';
 };
 
 /**
@@ -36,7 +32,7 @@ const isValidLink = (node) => {
  * @param {string} delimiter delimiter to be used
  */
 const isLinkCard = (node, delimiter) => {
-	return node.children[0].value === delimiter;
+    return node.children[0].value === delimiter;
 };
 
 /**
@@ -45,19 +41,19 @@ const isLinkCard = (node, delimiter) => {
  * @returns formatted url string
  */
 const getUrlString = (url) => {
-	const urlString = url.startsWith('http') ? url : `https://${url}`;
+    const urlString = url.startsWith('http') ? url : `https://${url}`;
 
-	try {
-		return new URL(urlString).toString();
-	} catch (error) {
-		return null;
-	}
+    try {
+        return new URL(urlString).toString();
+    } catch (error) {
+        return null;
+    }
 };
 
 module.exports = {
-	fetchData,
-	getDataValue,
-	isValidLink,
-	isLinkCard,
-	getUrlString,
+    fetchData,
+    getDataValue,
+    isValidLink,
+    isLinkCard,
+    getUrlString,
 };
