@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "link": "yarn link",
+    "unlink": "yarn unlink",
     "publish": "yarn publish"
   },
   "repository": {
