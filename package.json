@@ -29,6 +29,10 @@
   "dependencies": {
     "puppeteer": "^13.1.3",
     "puppeteer-cluster": "^0.23.0",
+    "sharp": "^0.30.3",
     "unist-util-visit": "^2.0.3"
+  },
+  "peerDependencies": {
+    "gatsby-transformer-remark": ">=4.8.0"
   }
 }
