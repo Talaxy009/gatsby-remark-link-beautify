@@ -28,12 +28,12 @@
   },
   "homepage": "https://github.com/Talaxy009/gatsby-remark-link-beautify#readme",
   "dependencies": {
-    "puppeteer": "^13.5.1",
+    "puppeteer": "^13.5.2",
     "puppeteer-cluster": "^0.23.0",
     "sharp": "^0.30.3",
     "unist-util-visit": "^2.0.3"
   },
   "peerDependencies": {
-    "gatsby-transformer-remark": ">=4.8.0"
+    "gatsby-transformer-remark": ">=5.12.0"
   }
 }
