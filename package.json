@@ -34,6 +34,6 @@
     "unist-util-visit": "^2.0.3"
   },
   "peerDependencies": {
-    "gatsby-transformer-remark": ">=5.12.0"
+    "gatsby-transformer-remark": ">=5.8.0"
   }
 }
