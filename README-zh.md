@@ -1,0 +1,125 @@
+# gatsby-remark-link-beautify
+
+一个通过预览目标网页以实现链接美化的 Gatsby 插件。
+
+[English Version](https://github.com/Talaxy009/gatsby-remark-link-beautify/blob/main/README.md)
+
+[![npm version](https://badge.fury.io/js/gatsby-remark-link-beautify.svg)](https://badge.fury.io/js/gatsby-remark-link-beautify)
+
+## 功能
+
+本插件主要有两个功能：
+
+- 它可以将目标页面的截图添加到链接的提示中。当把鼠标悬停在链接上时，它将显示该截图。
+- 它可以在页面中嵌入了带有目标网站信息的卡片。它只在 [下面](#LinkCard) 的情况下这样做。
+
+下面的示例使用了 `twitter-card` 主题。
+
+![example](https://github.com/Talaxy009/gatsby-remark-link-beautify/raw/main/assets/example.gif)
+
+## 安装
+
+```shell
+npm install gatsby-remark-link-beautify
+```
+
+或
+
+```shell
+yarn add gatsby-remark-link-beautify
+```
+
+另外，本插件依赖 `gatsby-transformer-remark`。
+
+## 使用方法
+
+1. 修改你的 gatsby-config.js 文件以启用本插件
+
+    ```js
+    // 你的 gatsby-config.js
+    plugins: [
+        {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [`gatsby-remark-link-beautify`],
+            },
+        },
+    ];
+    ```
+
+    或
+
+    ```js
+    // 你的 gatsby-config.js
+    plugins: [
+        {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [
+                    {
+                        resolve: `gatsby-remark-link-beautify`,
+                        options: {
+                            // 你的插件配置
+                        },
+                    },
+                ],
+            },
+        },
+    ];
+    ```
+
+2. 加载本插件的 CSS
+
+    ```js
+    // 你的 gatsby-browser.js
+    import 'gatsby-remark-link-beautify/themes/notion.css';
+    ```
+
+    有两种主题样式可选：`notion.css` 或 `twitter-card.css`。选择一个你喜欢的或是直接加载一个自定义的样式。
+
+之后你就可以通过以下方式使用本插件：
+
+### 预览目标网页
+
+像平时一样在 Markdown 中使用链接：
+
+```md
+[Gatsby](https://www.gatsbyjs.org/) is a free and open source framework for developing blazing fast websites and apps.
+```
+
+然后本插件就会将目标页面的截图添加到这个链接的提示中。当把鼠标悬停在链接上时，就会显示该截图。
+
+### 生成卡片
+
+像平时一样在 Markdown 中使用链接，不过要把方括号里的文本改成你配置的 `delimiter`：
+
+```md
+This is the Github repository:
+
+[$card](https://github.com/gatsbyjs/gatsby/)
+```
+
+然后，本插件将在页面中嵌入一个带有该链接的目标网站信息的卡片。
+
+## 配置选项
+
+| 配置名            | 类型      | 默认值                      | 描述                         |
+| ----------------- | --------- | --------------------------- | ---------------------------- |
+| delimiter         | `string`  | `$card`                     | 需要创建卡片的链接标识       |
+| timeout           | `number`  | `30000`                     | puppeteer 的超时时间（毫秒）|
+| screenshotQuality | `number`  | `80`                        | 截图的质量（百分比） |
+| showFavicon       | `boolean` | `true`                      | 是否显示网站图标             |
+| clusterSize       | `number`  | `2`                         | 最大并行工作数               |
+| error             | `object`  | `{title: 'Not Found Site'}` | 获取网站信息错误时的默认值   |
+
+## 疑难解答
+
+### 关于 sharp
+
+从 `1.2.0` 开始，本插件会使用 [sharp](https://github.com/lovell/sharp) 来调整截图尺寸和质量。 根据 [gatsby-plugin-sharp 的官方文档](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting)，当项目中有多个互不兼容的不同版本 `sharp` 依赖时可能会产生报错。 如果你遇到了类似的问题，请更新上述文档中列举的官方插件。
+
+## 启发
+
+本项目受了 [gatsby-remark-link-preview](https://github.com/lichin-lin/gatsby-remark-link-preview/) 的启发且添加了我的一些想法。比如可以自定义组件样式，当爬取网站信息失败时不显示错误消息（因为一些网站的 SEO 并不完善）以及可以通过截图来预览目标站点。由于代码变动十分之大，我决定自己发布一个插件。
+
+感谢 [@lichin-lin](https://github.com/lichin-lin) 和 [@JaeYeopHan](https://github.com/JaeYeopHan)

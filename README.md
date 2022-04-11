@@ -2,6 +2,8 @@
 
 A gatsby plugin to beautify links by previewing them.
 
+[中文文档](https://github.com/Talaxy009/gatsby-remark-link-beautify/blob/main/README-zh.md)
+
 [![npm version](https://badge.fury.io/js/gatsby-remark-link-beautify.svg)](https://badge.fury.io/js/gatsby-remark-link-beautify)
 
 ## Features
@@ -118,6 +120,6 @@ After `1.2.0`, this plugin will use the [sharp](https://github.com/lovell/sharp)
 
 ## Inspiration
 
-This plugin is inspired by [gatsby-remark-link-preview](https://github.com/lichin-lin/gatsby-remark-link-preview/), and added some of my thoughts. Such as customizing the component's style, don't show the error message on the card if fetch meta data failed and previewing all links with the screenshot. Due to excessive changes, I decided to make a new plugin.
+This plugin is inspired by [gatsby-remark-link-preview](https://github.com/lichin-lin/gatsby-remark-link-preview/), and added some of my thoughts. Such as customizing the component's style, don't show the error message on the card if fetch meta data failed (because the SEO of some websites may not be perfect) and previewing all links with the screenshot. Due to excessive changes, I decided to make a new plugin.
 
 Thanks to [@lichin-lin](https://github.com/lichin-lin) and [@JaeYeopHan](https://github.com/JaeYeopHan)
