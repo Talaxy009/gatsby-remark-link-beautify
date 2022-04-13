@@ -1,9 +1,6 @@
 const visit = require('unist-util-visit');
-const {Cluster} = require('puppeteer-cluster');
-
-const {getHTML: getCardHTML, getPageData} = require('./linkCard');
-const {getHTML: getPreviewHTML, getPageScreenshot} = require('./linkPreview');
-const {isValidLink, isLinkCard, getUrlString} = require('./utils');
+const {isValidLink, getUrlString} = require('./utils');
+const {init, free, task, close} = require('./taskManagement');
 
 const defaultOption = require('../shared/defaultOption');
 
@@ -11,33 +8,7 @@ require('events').setMaxListeners(0);
 
 module.exports = async ({cache, markdownAST}, pluginOption) => {
     const options = {...defaultOption, ...pluginOption};
-    const {delimiter, showFavicon, clusterSize, timeout} = options;
-    const cluster = await Cluster.launch({
-        concurrency: Cluster.CONCURRENCY_CONTEXT,
-        maxConcurrency: clusterSize,
-        timeout: timeout,
-    });
-
-    await cluster.task(async ({page, data}) => {
-        const {node, url} = data;
-        let html = await cache.get(url);
-
-        if (!html) {
-            if (isLinkCard(node, delimiter)) {
-                const data = await getPageData(page, url, options);
-                html = getCardHTML(data, showFavicon);
-            } else {
-                // prettier-ignore
-                const screenshot = await getPageScreenshot(page, url, options);
-                html = getPreviewHTML(node, screenshot);
-            }
-            await cache.set(url, html);
-        }
-
-        node.type = 'html';
-        node.value = html;
-        node.children = undefined;
-    });
+    const tasks = []; // Array of tasks data
 
     visit(markdownAST, 'link', (node) => {
         const {url, value = url} = node;
@@ -46,10 +17,17 @@ module.exports = async ({cache, markdownAST}, pluginOption) => {
             return;
         }
 
-        cluster.queue({node, url: urlString});
+        tasks.push({node, url: urlString});
     });
 
-    await cluster.idle();
-    await cluster.close();
+    if (!tasks.length) {
+        return markdownAST;
+    }
+
+    await init(options);
+    await free(tasks.length);
+    await Promise.all(tasks.map((t) => task({cache, ...t}, options)));
+    await close();
+
     return markdownAST;
 };

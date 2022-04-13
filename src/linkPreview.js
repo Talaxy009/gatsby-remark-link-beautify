@@ -10,8 +10,8 @@ const {imgResize} = require('./utils');
  */
 const getPageScreenshot = async (page, url, options) => {
     try {
-        await page.goto(url);
-        await page.waitForTimeout(2000);
+        await page.goto(url, {timeout: options.timeout});
+        await page.waitForTimeout(1000);
         const screenshot = await page.screenshot();
 
         const img = await imgResize(screenshot, 400, options.screenshotQuality);
@@ -37,10 +37,7 @@ const getHTML = (node, screenshot) => {
         <a target="_blank" rel="noopener noreferrer" href="${url}">
             ${children[0].value}
         </a>
-		${
-            screenshot &&
-            `<img src="data:image/webp;base64,${screenshot}" />`
-        }
+		${screenshot && `<img src="data:image/webp;base64,${screenshot}" />`}
     </span>`.trim();
 };
 
