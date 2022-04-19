@@ -30,7 +30,7 @@
     cursor: pointer;
     width: 100%;
     display: flex;
-	flex-direction: column-reverse;
+    flex-direction: column-reverse;
     border-radius: 0.85714em;
     border-width: 1px;
     border-style: solid;
@@ -82,7 +82,7 @@
 .link-card-url {
     display: flex;
     margin-top: 6px;
-	color: #8899A6;
+    color: #8899A6;
 }
 
 .link-card-favicon {
