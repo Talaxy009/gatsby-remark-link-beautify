@@ -107,10 +107,14 @@ This is the Github repository:
 | ----------------- | --------- | --------------------------- | ---------------------------- |
 | delimiter         | `string`  | `$card`                     | 需要创建卡片的链接标识       |
 | timeout           | `number`  | `30000`                     | puppeteer 的超时时间（毫秒）|
-| screenshotQuality | `number`  | `80`                        | 截图的质量（百分比） |
+| screenshotQuality | `number`  | `80`                        | 截图的质量（百分比）      |
 | showFavicon       | `boolean` | `true`                      | 是否显示网站图标             |
-| clusterSize       | `number`  | `2`                         | 最大并行工作数               |
+| browserNumer      | `number`  | `3`                         | 启动的浏览器数               |
 | error             | `object`  | `{title: 'Not Found Site'}` | 获取网站信息错误时的默认值   |
+
+### 关于 `browserNumer`
+
+`browserNumer` 指的是启动的浏览器的数量。本插件最多为每个浏览器打开 5 个标签，所以默认情况下可以同时处理 15 个页面。建议根据你的内存大小来设置 `browserNumer`。
 
 ## 疑难解答
 
