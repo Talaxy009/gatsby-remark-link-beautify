@@ -1,6 +1,6 @@
 const DEFAULT_TIMEOUT = 30000;
 const DEFAULT_SCREENSHOT_QUALITY = 80;
-const DEFAULT_BROSWER_NUMBER = 4;
+const DEFAULT_BROSWER_NUMBER = 3;
 
 const defaultOption = {
     delimiter: '$card',

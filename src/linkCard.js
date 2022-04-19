@@ -11,6 +11,7 @@ const {fetchData, getDataValue} = require('./utils');
  */
 const getPageData = async (page, url, options) => {
     const Default = {
+        success: false,
         title: options.error.title,
         description: '',
         favicon: '',
@@ -33,22 +34,23 @@ const getPageData = async (page, url, options) => {
             ]);
 
         // prettier-ignore
-        const description = getDataValue(descriptionData, Default['description']);
-        const ogImage = getDataValue(ogImageData, Default['ogImage']);
-        let favicon = getDataValue(faviconData, Default['favicon']);
-        const title = getDataValue(titleData, Default['title']);
-        const icon = getDataValue(iconData, Default['icon']);
+        const description = getDataValue(descriptionData, Default.description);
+        const ogImage = getDataValue(ogImageData, Default.ogImage);
+        let favicon = getDataValue(faviconData, Default.favicon);
+        const title = getDataValue(titleData, Default.title);
+        const icon = getDataValue(iconData, Default.icon);
 
         if (!favicon) {
             favicon = icon;
         }
 
         return {
-            title,
+            success: true,
             description,
-            url,
             ogImage,
             favicon,
+            title,
+            url,
         };
     } catch (e) {
         console.error(`Unable to get page data from ${url}`);

@@ -7,6 +7,7 @@ const {getHTML: getPreviewHTML, getPageScreenshot} = require('./linkPreview');
 const {isLinkCard} = require('./utils');
 
 const emitter = new EventEmitter();
+const PAGE_NUMBER_PER_BROWSER = 5;
 
 /**
  * Initialize puppeteer and add websocket endpoint to WSE_LIST
@@ -27,13 +28,10 @@ const init = async (options) => {
     global.WSE_LIST = [];
     global.PUPPETEER_PAGE_NUMBER = 0;
     global.LINK_BEAUTIFY_LINSTER = 0;
-    global.LINK_BEAUTIFY_CALLER = 1;
-    for (let i = 0; i < num; i++) {
-        const browser = await puppeteer.launch({
-            headless: true,
-            args,
-        });
-        WSE_LIST[i] = browser.wsEndpoint();
+    global.LINK_BEAUTIFY_CALLER = 0;
+    while (WSE_LIST.length < num) {
+        const browser = await puppeteer.launch({args});
+        WSE_LIST.push(browser.wsEndpoint());
     }
     emitter.emit('linkBeautifyInit');
 };
@@ -45,7 +43,7 @@ const close = async () => {
     // If there are no more taskgroups running, reset global variables
     if (PUPPETEER_PAGE_NUMBER === 0) {
         LINK_BEAUTIFY_LINSTER = 0;
-        LINK_BEAUTIFY_CALLER = 1;
+        LINK_BEAUTIFY_CALLER = 0;
         // Do not close the browser if in development mode
         if (process.env.NODE_ENV !== 'development') {
             while (WSE_LIST.length) {
@@ -58,22 +56,23 @@ const close = async () => {
 };
 
 /**
- * If there are free spaces return immediately otherwise wait for it
+ * If there are free tabs return immediately otherwise wait for it
  * @param {number} tasksNum number of tasks
  * @returns
  */
 const free = (tasksNum) => {
     // Small taskgroups will run immediately
-    if (tasksNum < 3) {
+    // If there are free tabs, run immediately
+    if (
+        tasksNum < 3 ||
+        PUPPETEER_PAGE_NUMBER < PAGE_NUMBER_PER_BROWSER * WSE_LIST.length
+    ) {
         return;
     }
-    // First taskgroup will run immediately
-    // Other taskgroups will wait for the first one to finish
-    if (LINK_BEAUTIFY_LINSTER++) {
-        return new Promise((resolve) => {
-            emitter.once(`linkBeautifyFree-${LINK_BEAUTIFY_LINSTER}`, resolve);
-        });
-    }
+    // Other taskgroups will wait for free tabs
+    return new Promise((resolve) => {
+        emitter.once(`linkBeautifyFree-${++LINK_BEAUTIFY_LINSTER}`, resolve);
+    });
 };
 
 /**
@@ -92,7 +91,7 @@ const newPage = (browser) => {
 const closePage = (page) => {
     // If there are free spaces && there are taskgroups waitting, run the next task
     if (
-        3 * WSE_LIST.length > --PUPPETEER_PAGE_NUMBER &&
+        PAGE_NUMBER_PER_BROWSER * WSE_LIST.length > --PUPPETEER_PAGE_NUMBER &&
         LINK_BEAUTIFY_LINSTER > LINK_BEAUTIFY_CALLER
     ) {
         emitter.emit(`linkBeautifyFree-${++LINK_BEAUTIFY_CALLER}`);
@@ -114,6 +113,7 @@ const task = async (data, options) => {
     let html;
 
     if (isLinkCard(node, options.delimiter)) {
+        // If there are data in cache, return it
         html = await cache.get(`linkCard-${url}`);
         if (!html) {
             const page = await newPage(browser);
