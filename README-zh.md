@@ -103,18 +103,23 @@ This is the Github repository:
 
 ## 配置选项
 
-| 配置名            | 类型      | 默认值                      | 描述                         |
-| ----------------- | --------- | --------------------------- | ---------------------------- |
-| delimiter         | `string`  | `$card`                     | 需要创建卡片的链接标识       |
-| timeout           | `number`  | `30000`                     | puppeteer 的超时时间（毫秒）|
-| screenshotQuality | `number`  | `80`                        | 截图的质量（百分比）      |
-| showFavicon       | `boolean` | `true`                      | 是否显示网站图标             |
-| browserNumer      | `number`  | `3`                         | 启动的浏览器数               |
-| error             | `object`  | `{title: 'Not Found Site'}` | 获取网站信息错误时的默认值   |
+| 配置名              | 类型      | 默认值                      | 描述                         |
+| ------------------- | --------- | --------------------------- | ---------------------------- |
+| delimiter           | `string`  | `$card`                     | 需要创建卡片的链接标识       |
+| timeout             | `number`  | `30000`                     | puppeteer 的超时时间（毫秒）|
+| screenshotQuality   | `number`  | `80`                        | 截图的质量（百分比）       |
+| showFavicon         | `boolean` | `true`                      | 是否显示网站图标             |
+| browserNumer        | `number`  | `3`                         | 启动的浏览器数               |
+| puppeteerLaunchArgs | `array`   | `[]`                        | puppeteer 启动参数           |
+| error               | `object`  | `{title: 'Not Found Site'}` | 获取网站信息错误时的默认值   |
 
 ### 关于 `browserNumer`
 
 `browserNumer` 指的是启动的浏览器的数量。本插件最多为每个浏览器打开 5 个标签，所以默认情况下可以同时处理 15 个页面。建议根据你的内存大小来设置 `browserNumer`。
+
+### 关于 `puppeteerLaunchArgs`
+
+`puppeteerLaunchArgs` 会作为 `args` 参数传入 `puppeteer.launch` 中，你可以在这里直接配置 `puppeteer` 的启动参数。
 
 ## 疑难解答
 

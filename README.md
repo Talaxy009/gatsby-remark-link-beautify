@@ -103,18 +103,23 @@ Then the plugin will embed a card with the link's target website information in 
 
 ## Options
 
-| Name              | Type      | Default                     | Description                        |
-| ----------------- | --------- | --------------------------- | ---------------------------------- |
-| delimiter         | `string`  | `$card`                     | Title of the link to create a card |
-| timeout           | `number`  | `30000`                     | Default timeout(ms) for puppeteer  |
-| screenshotQuality | `number`  | `80`                        | The quality of the screenshot in % |
-| showFavicon       | `boolean` | `true`                      | Whether to show the favicon or not |
-| browserNumer      | `number`  | `3`                         | Number of browsers launched        |
-| error             | `object`  | `{title: 'Not Found Site'}` | Default config when error          |
+| Name                | Type      | Default                     | Description                        |
+| ------------------- | --------- | --------------------------- | ---------------------------------- |
+| delimiter           | `string`  | `$card`                     | Title of the link to create a card |
+| timeout             | `number`  | `30000`                     | Default timeout(ms) for puppeteer  |
+| screenshotQuality   | `number`  | `80`                        | The quality of the screenshot in % |
+| showFavicon         | `boolean` | `true`                      | Whether to show the favicon or not |
+| browserNumer        | `number`  | `3`                         | Number of browsers launched        |
+| puppeteerLaunchArgs | `array`   | `[]`                        | Arguments for puppeteer launch     |
+| error               | `object`  | `{title: 'Not Found Site'}` | Default config when error          |
 
 ### About `browserNumer`
 
 `browserNumer` is the number of browsers launched. This plugin will open 5 tabs per browser at most, so 15 pages can be handled at the same time in default. It is recommended to set `browserNumer` depending on the size of your memory.
+
+### About `puppeteerLaunchArgs`
+
+`puppeteerLaunchArgs` will be passed into `puppeteer.launch` as `args` arguments, where you can configure `puppeteer` launch parameters directly.
 
 ## Troubleshooting
 
