@@ -119,7 +119,9 @@ const task = async (data, options) => {
             const page = await newPage(browser);
             const data = await getPageData(page, url, options);
             html = getCardHTML(data, options.showFavicon);
-            await cache.set(`linkCard-${url}`, html);
+            if (data.success) {
+                await cache.set(`linkCard-${url}`, html);
+            }
             await closePage(page);
         }
     } else {
@@ -128,7 +130,9 @@ const task = async (data, options) => {
             const page = await newPage(browser);
             const screenshot = await getPageScreenshot(page, url, options);
             html = getPreviewHTML(node, screenshot);
-            await cache.set(`linkPreview-${url}`, html);
+            if (screenshot.length) {
+                await cache.set(`linkPreview-${url}`, html);
+            }
             await closePage(page);
         }
     }
