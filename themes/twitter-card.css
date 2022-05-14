@@ -1,5 +1,6 @@
 /* for link preview */
 .link-preview-container {
+    display: inline-block;
     position: relative;
 }
 
