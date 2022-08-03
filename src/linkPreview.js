@@ -18,7 +18,7 @@ const getPageScreenshot = async (page, url, options) => {
 
         return img.toString('base64');
     } catch (e) {
-        console.error(`Unable to get screenshot from ${url}`);
+        console.log(`link-beautify: Unable to get screenshot from ${url}`);
         return '';
     }
 };

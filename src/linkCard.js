@@ -53,7 +53,7 @@ const getPageData = async (page, url, options) => {
             url,
         };
     } catch (e) {
-        console.error(`Unable to get page data from ${url}`);
+        console.log(`link-beautify: Unable to get page data from ${url}`);
         return Default;
     }
 };
