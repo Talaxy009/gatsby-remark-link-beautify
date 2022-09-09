@@ -10,7 +10,7 @@ const {imgResize} = require('./utils');
  */
 const getPageScreenshot = async (page, url, options) => {
     try {
-        await page.goto(url, {timeout: options.timeout});
+        await page.goto(url, {timeout: options.timeout, waitUntil: 'load'});
 
         const screenshot = await page.screenshot();
         const img = await imgResize(screenshot, 400, options.screenshotQuality);
