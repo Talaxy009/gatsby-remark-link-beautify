@@ -13,7 +13,7 @@ const getPageScreenshot = async (page, url, options) => {
         await page.goto(url, {timeout: options.timeout, waitUntil: 'load'});
 
         const screenshot = await page.screenshot();
-        const img = await imgResize(screenshot, 400, options.screenshotQuality);
+        const img = await imgResize(screenshot, 600, options.screenshotQuality);
 
         return img.toString('base64');
     } catch (e) {
