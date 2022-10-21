@@ -9,7 +9,8 @@ const {fetchData, getDataValue} = require('./utils');
  * @param {object} options options
  * @returns page data
  */
-const getPageData = async (page, url, options) => {
+const getPageData = async (page, data, options) => {
+    const {url, reporter} = data;
     const Default = {
         success: false,
         title: options.error.title,
@@ -53,7 +54,7 @@ const getPageData = async (page, url, options) => {
             url,
         };
     } catch (e) {
-        console.log(`link-beautify: Unable to get page data from ${url}`);
+        reporter.warn(`link-beautify: Unable to get page data from ${url}`);
         return Default;
     }
 };
