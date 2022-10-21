@@ -1,43 +1,74 @@
 const puppeteer = require('puppeteer');
-const {imgResize} = require('./utils');
+const {fluid} = require('gatsby-plugin-sharp');
+
+const {buildImg} = require('./utils');
 
 /**
  * get page data from url by puppeteer
  * @param {puppeteer.Page} page puppeteer page object
  * @param {string} url the url to be fetched
  * @param {object} options options
- * @returns screenshot image in base64
+ * @returns image file obj
  */
-const getPageScreenshot = async (page, url, options) => {
+const getPageScreenshot = async (page, data, options) => {
+    const {url, reporter} = data;
+    const file = buildImg(url);
+
     try {
         await page.goto(url, {timeout: options.timeout, waitUntil: 'load'});
+        await page.screenshot({path: file.absolutePath});
 
-        const screenshot = await page.screenshot();
-        const img = await imgResize(screenshot, 600, options.screenshotQuality);
-
-        return img.toString('base64');
+        return file;
     } catch (e) {
-        console.log(`link-beautify: Unable to get screenshot from ${url}`);
-        return '';
+        reporter.warn(`link-beautify: Unable to get screenshot from ${url}`);
+        return null;
     }
 };
 
 /**
  * build html string from page data
  * @param {object} node link node
- * @param {string} screenshot image in base64
+ * @param {string} file image path
+ * @param {number} quality image quality
  * @returns html string
  */
-const getHTML = (node, screenshot) => {
-    const {url, children} = node;
+const getHTML = async (data, file, quality) => {
+    const {node, reporter, cache} = data;
+    const linkHtml = `
+    <a target="_blank" rel="noopener noreferrer" href="${node.url}">
+        ${node.children[0].value}
+    </a>`;
 
-    return `
-    <span class="link-preview-container">
-        <a target="_blank" rel="noopener noreferrer" href="${url}">
-            ${children[0].value}
-        </a>
-        ${screenshot && `<img src="data:image/webp;base64,${screenshot}" />`}
-    </span>`.trim();
+    if (!file) return linkHtml;
+
+    try {
+        const fluidResult = await fluid({
+            file,
+            args: {maxWidth: 800, srcSetBreakpoints: [400], quality},
+            reporter,
+            cache,
+        });
+        return `
+        <span class="link-preview-container">
+            ${linkHtml}
+            ${
+                fluidResult &&
+                `
+            <img
+                src="${fluidResult.src}"
+                srcset="${fluidResult.srcSet}"
+                sizes="${fluidResult.sizes}"
+                loading="lazy"
+                decoding="async"
+                style="background-image: url('${fluidResult.base64}'); background-size: cover;"
+            />
+            `
+            }
+        </span>`.trim();
+    } catch (error) {
+        reporter.warn(error);
+        return linkHtml;
+    }
 };
 
 module.exports = {

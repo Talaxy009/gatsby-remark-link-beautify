@@ -1,4 +1,5 @@
-const sharp = require('sharp');
+const md5 = require('md5');
+const path = require('path');
 
 /**
  * build promise object from puppeteer's method
@@ -53,14 +54,27 @@ const getUrlString = (url) => {
 };
 
 /**
- * resize image
- * @param {Buffer} img image buffer
- * @param {number} width width of image after resize
- * @param {number} quality quality of the image in %
- * @returns image buffer
+ * build image file object
+ * @param {string} url website url
+ * @returns file object
  */
-const imgResize = (img, width, quality) => {
-    return sharp(img).resize(width).webp({quality: quality}).toBuffer();
+const buildImg = (url) => {
+    const name = md5(url);
+    const extension = 'jpg';
+    const base = name + '.' + extension;
+
+    return {
+        name,
+        base,
+        extension,
+        internal: {contentDigest: name},
+        absolutePath: path.resolve(
+            process.cwd(),
+            '.cache',
+            'linkBeautify',
+            base,
+        ),
+    };
 };
 
 module.exports = {
@@ -69,5 +83,5 @@ module.exports = {
     isValidLink,
     isLinkCard,
     getUrlString,
-    imgResize,
+    buildImg,
 };

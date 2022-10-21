@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const puppeteer = require('puppeteer');
 const EventEmitter = require('events').EventEmitter;
 
@@ -15,6 +17,11 @@ const PAGE_NUMBER_PER_BROWSER = 5;
  * @returns {Promise} If browser is ready, return immediately otherwise wait for it
  */
 const init = async (options) => {
+    // create linkBeautify cache folder
+    const p = path.resolve(process.cwd(), '.cache', 'linkBeautify');
+    if (!fs.existsSync(p)) {
+        fs.mkdirSync(p);
+    }
     const {browserNumer: num, puppeteerLaunchArgs: args} = options;
     if (global.WSE_LIST) {
         if (global.WSE_LIST.length >= num) {
@@ -117,9 +124,9 @@ const task = async (data, options) => {
         html = await cache.get(`linkCard-${url}`);
         if (!html) {
             const page = await newPage(browser);
-            const data = await getPageData(page, url, options);
-            html = getCardHTML(data, options.showFavicon);
-            if (data.success) {
+            const meta = await getPageData(page, data, options);
+            html = getCardHTML(meta, options.showFavicon);
+            if (meta.success) {
                 await cache.set(`linkCard-${url}`, html);
             }
             await closePage(page);
@@ -128,9 +135,13 @@ const task = async (data, options) => {
         html = await cache.get(`linkPreview-${url}`);
         if (!html) {
             const page = await newPage(browser);
-            const screenshot = await getPageScreenshot(page, url, options);
-            html = getPreviewHTML(node, screenshot);
-            if (screenshot.length) {
+            const screenshot = await getPageScreenshot(page, data, options);
+            html = await getPreviewHTML(
+                data,
+                screenshot,
+                options.screenshotQuality,
+            );
+            if (screenshot) {
                 await cache.set(`linkPreview-${url}`, html);
             }
             await closePage(page);
