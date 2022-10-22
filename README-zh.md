@@ -106,8 +106,8 @@ This is the Github repository:
 | 配置名              | 类型      | 默认值                      | 描述                         |
 | ------------------- | --------- | --------------------------- | ---------------------------- |
 | delimiter           | `string`  | `$card`                     | 需要创建卡片的链接标识       |
-| timeout             | `number`  | `30000`                     | puppeteer 的超时时间（毫秒）|
-| screenshotQuality   | `number`  | `80`                        | 截图的质量（百分比）       |
+| timeout             | `number`  | `30000`                     | puppeteer 的超时时间（毫秒） |
+| screenshotQuality   | `number`  | `80`                        | 截图的质量（百分比）         |
 | showFavicon         | `boolean` | `true`                      | 是否显示网站图标             |
 | browserNumer        | `number`  | `3`                         | 启动的浏览器数               |
 | puppeteerLaunchArgs | `array`   | `[]`                        | puppeteer 启动参数           |
@@ -125,7 +125,9 @@ This is the Github repository:
 
 ### 关于 sharp
 
-从 `1.2.0` 开始，本插件会使用 [sharp](https://github.com/lovell/sharp) 来调整截图尺寸和质量。 根据 [gatsby-plugin-sharp 的官方文档](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting)，当项目中有多个互不兼容的不同版本 `sharp` 依赖时可能会产生报错。 如果你遇到了类似的问题，请更新上述文档中列举的官方插件。
+`1.2.x` 和 `2.0.x` 版本的本插件会使用 [sharp](https://github.com/lovell/sharp)来调整截图尺寸和质量。根据据 [gatsby-plugin-sharp 的官方文档](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting)，当项目中有多个互不兼容的不同版本 `sharp` 依赖时可能会产生报错。如果你遇到了类似的问题，请更新上述文档中列举的官方插件。
+
+**更优解：** 推荐使用 `2.1.0` 或更高版本的本插件，此版本不再单独依赖 sharp 而是调用官方插件 gatsby-plugin-sharp 的方法来处理截图。
 
 ## 启发
 

@@ -125,7 +125,9 @@ Then the plugin will embed a card with the link's target website information in 
 
 ### sharp
 
-After `1.2.0`, this plugin will use the [sharp](https://github.com/lovell/sharp) to resize screenshots. According to the [gatsby-plugin-sharp documentation](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting), it might cause some issues when there are multiple incompatible versions of the `sharp` dependency in different packages. If you encounter such issues, please update the dependencies according to the official documentation mentioned above.
+Version `1.2.x` and `2.0.x` of this plugin will use the [sharp](https://github.com/lovell/sharp) to resize screenshots. According to the [gatsby-plugin-sharp documentation](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting), it might cause some issues when there are multiple incompatible versions of the `sharp` dependency in different packages. If you encounter such issues, please update the dependencies according to the official documentation mentioned above.
+
+**better solution:** It is recommended to use the `2.1.0` or higher version of this plugin. Which no longer relies on sharp, but calls the method of the official plugin [gatsby-plugin-sharp](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-sharp) to process screenshots.
 
 ## Inspiration
 
