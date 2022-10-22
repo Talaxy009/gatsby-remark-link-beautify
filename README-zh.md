@@ -127,7 +127,7 @@ This is the Github repository:
 
 `1.2.x` 和 `2.0.x` 版本的本插件会使用 [sharp](https://github.com/lovell/sharp)来调整截图尺寸和质量。根据据 [gatsby-plugin-sharp 的官方文档](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting)，当项目中有多个互不兼容的不同版本 `sharp` 依赖时可能会产生报错。如果你遇到了类似的问题，请更新上述文档中列举的官方插件。
 
-**更优解：** 推荐使用 `2.1.0` 或更高版本的本插件，此版本不再单独依赖 sharp 而是调用官方插件 gatsby-plugin-sharp 的方法来处理截图。
+**更优解：** 推荐使用 `2.1.0` 或更高版本的本插件，此版本不再单独依赖 sharp 而是调用官方插件 [gatsby-plugin-sharp](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-sharp) 的方法来处理截图。
 
 ## 启发
 
