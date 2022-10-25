@@ -65,7 +65,6 @@ const close = async () => {
 /**
  * If there are free tabs return immediately otherwise wait for it
  * @param {number} tasksNum number of tasks
- * @returns
  */
 const free = (tasksNum) => {
     // Small taskgroups will run immediately
