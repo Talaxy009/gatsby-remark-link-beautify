@@ -44,7 +44,7 @@ const getHTML = async (data, file, quality) => {
     try {
         const fluidResult = await fluid({
             file,
-            args: {maxWidth: 800, srcSetBreakpoints: [400], quality},
+            args: {maxWidth: 800, srcSetBreakpoints: [800], quality},
             reporter,
             cache,
         });
@@ -56,8 +56,6 @@ const getHTML = async (data, file, quality) => {
                 `
             <img
                 src="${fluidResult.src}"
-                srcset="${fluidResult.srcSet}"
-                sizes="${fluidResult.sizes}"
                 loading="lazy"
                 decoding="async"
                 style="background-image: url('${fluidResult.base64}'); background-size: cover;"
