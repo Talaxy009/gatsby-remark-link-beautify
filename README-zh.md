@@ -6,7 +6,7 @@
 
 [![npm version](https://badge.fury.io/js/gatsby-remark-link-beautify.svg)](https://badge.fury.io/js/gatsby-remark-link-beautify)
 
-## 功能
+## ✨ 功能
 
 本插件主要有两个功能：
 
@@ -17,7 +17,7 @@
 
 ![example](https://github.com/Talaxy009/gatsby-remark-link-beautify/raw/main/assets/example.gif)
 
-## 安装
+## 🚚 安装
 
 ```shell
 npm install gatsby-remark-link-beautify
@@ -31,7 +31,7 @@ yarn add gatsby-remark-link-beautify
 
 另外，本插件依赖 `gatsby-transformer-remark`。
 
-## 使用方法
+## 🔦 使用方法
 
 1. 修改你的 gatsby-config.js 文件以启用本插件
 
@@ -101,7 +101,7 @@ This is the Github repository:
 
 然后，本插件将在页面中嵌入一个带有该链接的目标网站信息的卡片。
 
-## 配置选项
+## 🔧 配置选项
 
 | 配置名              | 类型      | 默认值                      | 描述                         |
 | ------------------- | --------- | --------------------------- | ---------------------------- |
@@ -121,15 +121,15 @@ This is the Github repository:
 
 `puppeteerLaunchArgs` 会作为 `args` 参数传入 `puppeteer.launch` 中，你可以在这里直接配置 `puppeteer` 的启动参数。
 
-## 疑难解答
+## 🚚 疑难解答
 
-### 关于 sharp
+### sharp 相关
 
 `1.2.x` 和 `2.0.x` 版本的本插件会使用 [sharp](https://github.com/lovell/sharp)来调整截图尺寸和质量。根据据 [gatsby-plugin-sharp 的官方文档](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting)，当项目中有多个互不兼容的不同版本 `sharp` 依赖时可能会产生报错。如果你遇到了类似的问题，请更新上述文档中列举的官方插件。
 
 **更优解：** 推荐使用 `2.1.0` 或更高版本的本插件，此版本不再单独依赖 sharp 而是调用官方插件 [gatsby-plugin-sharp](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-sharp) 的方法来处理截图。
 
-## 启发
+## 💡 启发
 
 本项目受了 [gatsby-remark-link-preview](https://github.com/lichin-lin/gatsby-remark-link-preview/) 的启发且添加了我的一些想法。比如可以自定义组件样式，当爬取网站信息失败时不显示错误消息（因为一些网站的 SEO 并不完善）以及可以通过截图来预览目标站点。由于代码变动十分之大，我决定自己发布一个插件。
 
