@@ -36,6 +36,8 @@ const init = async (options) => {
     global.PUPPETEER_PAGE_NUMBER = 0;
     global.LINK_BEAUTIFY_LINSTER = 0;
     global.LINK_BEAUTIFY_CALLER = 0;
+    global.LINK_BEAUTIFY_PVIMG_PROCESSING = new Set();
+    global.LINK_BEAUTIFY_PVIMG_FINISHED = new Set();
     while (WSE_LIST.length < num) {
         const browser = await puppeteer.launch({args});
         WSE_LIST.push(browser.wsEndpoint());
@@ -131,20 +133,14 @@ const task = async (data, options) => {
             await closePage(page);
         }
     } else {
-        html = await cache.get(`linkPreview-${url}`);
-        if (!html) {
-            const page = await newPage(browser);
-            const screenshot = await getPageScreenshot(page, data, options);
-            html = await getPreviewHTML(
-                data,
-                screenshot,
-                options.screenshotQuality,
-            );
-            if (screenshot) {
-                await cache.set(`linkPreview-${url}`, html);
-            }
-            await closePage(page);
-        }
+        const page = await newPage(browser);
+        const screenshot = await getPageScreenshot(page, data, options);
+        await closePage(page);
+        html = await getPreviewHTML(
+            data,
+            screenshot,
+            options.screenshotQuality,
+        );
     }
 
     node.type = 'html';

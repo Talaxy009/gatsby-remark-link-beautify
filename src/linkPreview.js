@@ -1,7 +1,10 @@
 const puppeteer = require('puppeteer');
 const {fluid} = require('gatsby-plugin-sharp');
+const EventEmitter = require('events').EventEmitter;
 
 const {buildImg} = require('./utils');
+
+const emitter = new EventEmitter();
 
 /**
  * get page data from url by puppeteer
@@ -14,9 +17,28 @@ const getPageScreenshot = async (page, data, options) => {
     const {url, reporter} = data;
     const file = buildImg(url);
 
+    // Check if a screenshot with the same name has already been done
+    if (global.LINK_BEAUTIFY_PVIMG_FINISHED.has(file.name)) {
+        return file;
+    }
+    // Check if a screenshot with the same name is being processed
+    if (global.LINK_BEAUTIFY_PVIMG_PROCESSING.has(file.name)) {
+        return new Promise((resolve) => {
+            emitter.once(`linkBeautifyDone-${file.name}`, () => {
+                resolve(file);
+            });
+        });
+    }
+    global.LINK_BEAUTIFY_PVIMG_PROCESSING.add(file.name);
+
     try {
         await page.goto(url, {timeout: options.timeout, waitUntil: 'load'});
         await page.screenshot({path: file.absolutePath});
+
+        // Move this screenshot to the FINISHED set and emit the event
+        global.LINK_BEAUTIFY_PVIMG_FINISHED.add(file.name);
+        global.LINK_BEAUTIFY_PVIMG_PROCESSING.delete(file.name);
+        emitter.emit(`linkBeautifyDone-${file.name}`);
 
         return file;
     } catch (e) {
