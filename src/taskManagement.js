@@ -33,11 +33,11 @@ const init = async (options) => {
         }
     }
     global.WSE_LIST = [];
-    global.PUPPETEER_PAGE_NUMBER = 0;
-    global.LINK_BEAUTIFY_LISTENER = 0;
-    global.LINK_BEAUTIFY_CALLER = 0;
-    global.LINK_BEAUTIFY_PVIMG_PROCESSING = new Set();
-    global.LINK_BEAUTIFY_PVIMG_FINISHED = new Set();
+    global.PUPPETEER_PAGE_NUMBER = 0;  // Current page count
+    global.LINK_BEAUTIFY_LISTENER = 0; // Listener number
+    global.LINK_BEAUTIFY_CALLER = 0; // Emitter number
+    global.LINK_BEAUTIFY_PVIMG_PROCESSING = new Set(); // Processing images set
+    global.LINK_BEAUTIFY_PVIMG_FINISHED = new Set(); // Finished images set
     while (WSE_LIST.length < num) {
         const browser = await puppeteer.launch({args});
         WSE_LIST.push(browser.wsEndpoint());
@@ -133,6 +133,7 @@ const task = async (data, options) => {
             await closePage(page);
         }
     } else {
+        // Do not use cache object as images are stored in cache files
         const page = await newPage(browser);
         const screenshot = await getPageScreenshot(page, data, options);
         await closePage(page);
