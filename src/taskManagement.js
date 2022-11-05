@@ -34,7 +34,7 @@ const init = async (options) => {
     }
     global.WSE_LIST = [];
     global.PUPPETEER_PAGE_NUMBER = 0;
-    global.LINK_BEAUTIFY_LINSTER = 0;
+    global.LINK_BEAUTIFY_LISTENER = 0;
     global.LINK_BEAUTIFY_CALLER = 0;
     global.LINK_BEAUTIFY_PVIMG_PROCESSING = new Set();
     global.LINK_BEAUTIFY_PVIMG_FINISHED = new Set();
@@ -51,7 +51,7 @@ const init = async (options) => {
 const close = async () => {
     // If there are no more taskgroups running, reset global variables
     if (PUPPETEER_PAGE_NUMBER === 0) {
-        LINK_BEAUTIFY_LINSTER = 0;
+        LINK_BEAUTIFY_LISTENER = 0;
         LINK_BEAUTIFY_CALLER = 0;
         // Do not close the browser if in development mode
         if (process.env.NODE_ENV !== 'development') {
@@ -79,7 +79,7 @@ const free = (tasksNum) => {
     }
     // Other taskgroups will wait for free tabs
     return new Promise((resolve) => {
-        emitter.once(`linkBeautifyFree-${++LINK_BEAUTIFY_LINSTER}`, resolve);
+        emitter.once(`linkBeautifyFree-${++LINK_BEAUTIFY_LISTENER}`, resolve);
     });
 };
 
@@ -100,7 +100,7 @@ const closePage = (page) => {
     // If there are free spaces && there are taskgroups waitting, run the next task
     if (
         PAGE_NUMBER_PER_BROWSER * WSE_LIST.length > --PUPPETEER_PAGE_NUMBER &&
-        LINK_BEAUTIFY_LINSTER > LINK_BEAUTIFY_CALLER
+        LINK_BEAUTIFY_LISTENER > LINK_BEAUTIFY_CALLER
     ) {
         emitter.emit(`linkBeautifyFree-${++LINK_BEAUTIFY_CALLER}`);
     }
