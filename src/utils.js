@@ -71,7 +71,8 @@ const buildImg = (url) => {
         absolutePath: path.resolve(
             process.cwd(),
             '.cache',
-            'linkBeautify',
+            'caches',
+            'gatsby-remark-link-beautify',
             base,
         ),
     };

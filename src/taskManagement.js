@@ -1,6 +1,4 @@
-const fs = require('fs');
 const md5 = require('md5');
-const path = require('path');
 const puppeteer = require('puppeteer');
 const EventEmitter = require('events').EventEmitter;
 
@@ -18,11 +16,6 @@ const PAGE_NUMBER_PER_BROWSER = 5;
  * @returns {Promise} If browser is ready, return immediately otherwise wait for it
  */
 const init = async (options) => {
-    // create linkBeautify cache folder
-    const p = path.resolve(process.cwd(), '.cache', 'linkBeautify');
-    if (!fs.existsSync(p)) {
-        fs.mkdirSync(p);
-    }
     const {browserNumer: num, puppeteerLaunchArgs: args} = options;
     if (global.WSE_LIST) {
         if (global.WSE_LIST.length >= num) {
