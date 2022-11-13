@@ -107,6 +107,7 @@ This is the Github repository:
 | ------------------- | --------- | --------------------------- | ---------------------------- |
 | delimiter           | `string`  | `$card`                     | 需要创建卡片的链接标识       |
 | timeout             | `number`  | `30000`                     | puppeteer 的超时时间（毫秒） |
+| enableLinkPreview   | `boolean` | `true`                      | 是否启用链接预览截图         |
 | screenshotQuality   | `number`  | `80`                        | 截图的质量（百分比）         |
 | showFavicon         | `boolean` | `true`                      | 是否显示网站图标             |
 | browserNumer        | `number`  | `3`                         | 启动的浏览器数               |

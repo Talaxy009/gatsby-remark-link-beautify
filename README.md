@@ -103,15 +103,16 @@ Then the plugin will embed a card with the link's target website information in 
 
 ## 🔧 Options
 
-| Name                | Type      | Default                     | Description                        |
-| ------------------- | --------- | --------------------------- | ---------------------------------- |
-| delimiter           | `string`  | `$card`                     | Title of the link to create a card |
-| timeout             | `number`  | `30000`                     | Default timeout(ms) for puppeteer  |
-| screenshotQuality   | `number`  | `80`                        | The quality of the screenshot in % |
-| showFavicon         | `boolean` | `true`                      | Whether to show the favicon or not |
-| browserNumer        | `number`  | `3`                         | Number of browsers launched        |
-| puppeteerLaunchArgs | `array`   | `[]`                        | Arguments for puppeteer launch     |
-| error               | `object`  | `{title: 'Not Found Site'}` | Default config when error          |
+| Name                | Type      | Default                     | Description                               |
+| ------------------- | --------- | --------------------------- | ----------------------------------------- |
+| delimiter           | `string`  | `$card`                     | Title of the link to create a card        |
+| timeout             | `number`  | `30000`                     | Default timeout(ms) for puppeteer         |
+| enableLinkPreview   | `boolean` | `true`                      | Whether to generate preview images or not |
+| screenshotQuality   | `number`  | `80`                        | The quality of the screenshot images in % |
+| showFavicon         | `boolean` | `true`                      | Whether to show the favicon or not        |
+| browserNumer        | `number`  | `3`                         | Number of browsers launched               |
+| puppeteerLaunchArgs | `array`   | `[]`                        | Arguments for puppeteer launch            |
+| error               | `object`  | `{title: 'Not Found Site'}` | Default config when error                 |
 
 ### About `browserNumer`
 
