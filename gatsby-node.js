@@ -6,9 +6,12 @@ exports.pluginOptionsSchema = ({Joi}) => {
         timeout: Joi.number()
             .default(30000)
             .description('Default timeout(ms) for puppeteer'),
+        enableLinkPreview: Joi.boolean()
+            .default(true)
+            .description('Whether to generate the preview images or not'),
         screenshotQuality: Joi.number()
             .default(80)
-            .description('The quality of the screenshot in %'),
+            .description('The quality of the screenshot images in %'),
         showFavicon: Joi.boolean()
             .default(true)
             .description('Whether to show the favicon or not'),
