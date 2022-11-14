@@ -124,6 +124,10 @@ This is the Github repository:
 
 ## 🚚 疑难解答
 
+### Gatsby Cloud
+
+由于 Gatsby Cloud 不支持在其内部运行 Puppeteer 之类的可执行程序（详见：[Gatsby issue 20970](https://github.com/gatsbyjs/gatsby/issues/20970) 和 [Gatsby issue 31839](https://github.com/gatsbyjs/gatsby/issues/31839)），因此依赖本插件的项目在 Gatsby Cloud 上构建可能会出现不可预测的问题（比如报错、超时），因此请选择移除本插件或是将项目迁移至其他支持 Puppeteer 的服务（比如 Netlify）上进行。
+
 ### sharp 相关
 
 `1.2.x` 和 `2.0.x` 版本的本插件会使用 [sharp](https://github.com/lovell/sharp)来调整截图尺寸和质量。根据据 [gatsby-plugin-sharp 的官方文档](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting)，当项目中有多个互不兼容的不同版本 `sharp` 依赖时可能会产生报错。如果你遇到了类似的问题，请更新上述文档中列举的官方插件。

@@ -124,6 +124,10 @@ Then the plugin will embed a card with the link's target website information in 
 
 ## 🚑️ Troubleshooting
 
+### Gatsby Cloud
+
+Since Gatsby Cloud does not support any custom binaries or WASM packages like Puppeteer (see [Gatsby issue 20970](https://github.com/gatsbyjs/gatsby/issues/20970) and [Gatsby issue 31839]( https://github.com/gatsbyjs/gatsby/issues/31839)). So projects that rely on this plugin may have unpredictable problems (e.g., errors, timeouts) when building on Gatsby Cloud, please choose to remove this plugin or migrate your project to another service that supports Puppeteer (e.g. Netlify).
+
 ### sharp
 
 Version `1.2.x` and `2.0.x` of this plugin will use the [sharp](https://github.com/lovell/sharp) to resize screenshots. According to the [gatsby-plugin-sharp documentation](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/#troubleshooting), it might cause some issues when there are multiple incompatible versions of the `sharp` dependency in different packages. If you encounter such issues, please update the dependencies according to the official documentation mentioned above.
