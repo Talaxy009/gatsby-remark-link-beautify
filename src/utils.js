@@ -1,4 +1,4 @@
-const md5 = require('md5');
+const uniqueSlug = require('unique-slug');
 const path = require('path');
 
 /**
@@ -56,10 +56,12 @@ const getUrlString = (url) => {
 /**
  * build image file object
  * @param {string} url website url
+ * @param {Function} createContentDigest contentDigest builder
  * @returns file object
  */
-const buildImg = (url) => {
-    const name = md5(url);
+const buildImg = (url, createContentDigest) => {
+    const name = uniqueSlug(url);
+    const contentDigest = createContentDigest(url);
     const extension = 'jpg';
     const base = name + '.' + extension;
 
@@ -67,7 +69,7 @@ const buildImg = (url) => {
         name,
         base,
         extension,
-        internal: {contentDigest: name},
+        internal: {contentDigest},
         absolutePath: path.resolve(
             process.cwd(),
             '.cache',

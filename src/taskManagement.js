@@ -1,5 +1,5 @@
-const md5 = require('md5');
 const puppeteer = require('puppeteer');
+const uniqueSlug = require('unique-slug');
 const EventEmitter = require('events').EventEmitter;
 
 const {getHTML: getCardHTML, getPageData} = require('./linkCard');
@@ -112,8 +112,8 @@ const task = async (data, options) => {
         WSE_LIST[Math.floor(Math.random() * WSE_LIST.length)];
     const browser = await puppeteer.connect({browserWSEndpoint});
 
-    const {node, url} = data;
-    const name = md5(url);
+    const {node, url, createContentDigest} = data;
+    const name = uniqueSlug(url);
     let html;
 
     if (isLinkCard(node, options.delimiter)) {
@@ -142,7 +142,7 @@ const task = async (data, options) => {
 
         html = getCardHTML(meta, options.showFavicon);
     } else {
-        const file = buildImg(url);
+        const file = buildImg(url, createContentDigest);
         const screenshot = {
             success: true, // Whether the screenshot was successfully captured and saved
             file,
