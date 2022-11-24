@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/Talaxy009/gatsby-remark-link-beautify#readme",
   "dependencies": {
-    "md5": "^2.3.0",
     "puppeteer": "^19.2.2",
+    "unique-slug": "^4.0.0",
     "unist-util-visit": "^2.0.3"
   },
   "peerDependencies": {
