@@ -49,9 +49,9 @@
     display: flex;
     flex-direction: column;
     flex: 4 1 180px;
-    padding: 12px 14px 14px;
-    width: calc(100% - 6px);
+    padding: 12px 14px;
     min-height: 60px;
+    min-width:0
 }
 
 .link-card-title {
@@ -60,6 +60,7 @@
     line-height: 22px;
     max-height: 22px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
     margin-bottom: 2px;
 }
@@ -78,6 +79,7 @@
 .link-card-url {
     display: flex;
     margin-top: 6px;
+    align-items: center;
 }
 
 .link-card-favicon {
