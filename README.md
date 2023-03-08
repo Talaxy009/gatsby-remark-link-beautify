@@ -1,10 +1,10 @@
 # gatsby-remark-link-beautify
 
+[![npm version](https://badge.fury.io/js/gatsby-remark-link-beautify.svg)](https://badge.fury.io/js/gatsby-remark-link-beautify)
+
 A gatsby plugin to beautify links by previewing them.
 
 [中文文档](https://github.com/Talaxy009/gatsby-remark-link-beautify/blob/main/README-zh.md)
-
-[![npm version](https://badge.fury.io/js/gatsby-remark-link-beautify.svg)](https://badge.fury.io/js/gatsby-remark-link-beautify)
 
 ## ✨ Features
 

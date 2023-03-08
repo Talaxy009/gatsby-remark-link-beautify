@@ -1,10 +1,10 @@
 # gatsby-remark-link-beautify
 
+[![npm version](https://badge.fury.io/js/gatsby-remark-link-beautify.svg)](https://badge.fury.io/js/gatsby-remark-link-beautify)
+
 一个通过预览目标网页以实现链接美化的 Gatsby 插件。
 
 [English Version](https://github.com/Talaxy009/gatsby-remark-link-beautify/blob/main/README.md)
-
-[![npm version](https://badge.fury.io/js/gatsby-remark-link-beautify.svg)](https://badge.fury.io/js/gatsby-remark-link-beautify)
 
 ## ✨ 功能
 
