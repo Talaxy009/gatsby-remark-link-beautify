@@ -1,5 +1,13 @@
 const uniqueSlug = require('unique-slug');
 const path = require('path');
+const fs = require('fs');
+
+const CACHE_PATH = path.resolve(
+    process.cwd(),
+    '.cache',
+    'caches',
+    'gatsby-remark-link-beautify',
+);
 
 /**
  * build promise object from puppeteer's method
@@ -70,14 +78,18 @@ const buildImg = (url, createContentDigest) => {
         base,
         extension,
         internal: {contentDigest},
-        absolutePath: path.resolve(
-            process.cwd(),
-            '.cache',
-            'caches',
-            'gatsby-remark-link-beautify',
-            base,
-        ),
+        absolutePath: path.resolve(CACHE_PATH, base),
     };
+};
+
+/**
+ * Build image Map object from cache
+ * @returns Map object
+ */
+const setImgMap = () => {
+    const result = new Map();
+    fs.readdirSync(CACHE_PATH).forEach((v) => result.set(v.slice(0, -4), true));
+    return result;
 };
 
 module.exports = {
@@ -87,4 +99,5 @@ module.exports = {
     isLinkCard,
     getUrlString,
     buildImg,
+    setImgMap,
 };
