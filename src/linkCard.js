@@ -22,7 +22,10 @@ const getPageData = async (page, data, options) => {
     };
 
     try {
-        await page.goto(url, {timeout: options.timeout, waitUntil: 'domcontentloaded'});
+        await page.goto(url, {
+            timeout: options.timeout,
+            waitUntil: 'domcontentloaded',
+        });
 
         // prettier-ignore
         const [titleData, descriptionData, ogImageData, faviconData, iconData] =
