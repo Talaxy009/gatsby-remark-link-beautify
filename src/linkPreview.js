@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const {fluid} = require('gatsby-plugin-sharp');
+const {fixed} = require('gatsby-plugin-sharp');
 
 /**
  * get page data from url by puppeteer
@@ -40,9 +40,9 @@ const getHTML = async (data, screenshot, quality) => {
     if (!screenshot.success) return linkHtml;
 
     try {
-        const fluidResult = await fluid({
+        const fixedResult = await fixed({
             file: screenshot.file,
-            args: {maxWidth: 800, srcSetBreakpoints: [800], quality},
+            args: {width: 400, quality},
             reporter,
             cache,
         });
@@ -50,13 +50,15 @@ const getHTML = async (data, screenshot, quality) => {
         <span class="link-preview-container">
             ${linkHtml}
             ${
-                fluidResult &&
+                fixedResult &&
                 `
             <img
-                src="${fluidResult.src}"
                 loading="lazy"
                 decoding="async"
-                style="background-image: url('${fluidResult.base64}'); background-size: cover;"
+                alt="site preview image"
+                src="${fixedResult.src}"
+                srcset="${fixedResult.srcSet}"
+                style="background-image: url('${fixedResult.base64}'); background-size: cover;"
             />
             `
             }
