@@ -2,3 +2,5 @@ node_modules/
 assets/
 test/
 *.log
+.gitignore
+.prettierrc.js

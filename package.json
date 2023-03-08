@@ -19,7 +19,8 @@
     "link",
     "preview",
     "card",
-    "beautify"
+    "beautify",
+    "summary"
   ],
   "author": "Talaxy009",
   "license": "MIT",
@@ -28,12 +29,15 @@
   },
   "homepage": "https://github.com/Talaxy009/gatsby-remark-link-beautify#readme",
   "dependencies": {
-    "puppeteer": "^19.2.2",
+    "puppeteer": "^19.7.3",
     "unique-slug": "^4.0.0",
     "unist-util-visit": "^2.0.3"
   },
   "peerDependencies": {
     "gatsby-plugin-sharp": ">=4.0.0",
     "gatsby-transformer-remark": ">=5.0.0"
+  },
+  "devDependencies": {
+    "gatsby-plugin-sharp": "^5.7.0"
   }
 }
