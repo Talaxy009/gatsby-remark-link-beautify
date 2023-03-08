@@ -6,7 +6,7 @@
   "scripts": {
     "link": "yarn link",
     "unlink": "yarn unlink",
-    "publish": "yarn publish"
+    "publish": "yarn npm publish"
   },
   "repository": {
     "type": "git",
