@@ -186,7 +186,7 @@ const task = async (data, options) => {
 
     node.type = 'html';
     node.value = html;
-    node.children = undefined;
+    node.children = [];
 };
 
 module.exports = {init, close, free, task};

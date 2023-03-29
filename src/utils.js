@@ -88,6 +88,9 @@ const buildImg = (url, createContentDigest) => {
  */
 const setImgMap = () => {
     const result = new Map();
+    if (!fs.existsSync(CACHE_PATH)) {
+        fs.mkdirSync(CACHE_PATH);
+    }
     fs.readdirSync(CACHE_PATH).forEach((v) => result.set(v.slice(0, -4), true));
     return result;
 };
