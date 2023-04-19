@@ -5,7 +5,7 @@ const {init, free, task, close} = require('./taskManagement');
 require('events').setMaxListeners(0);
 
 module.exports = async (
-    {cache, reporter, createContentDigest, markdownAST},
+    {cache, reporter, markdownAST},
     pluginOption,
 ) => {
     const tasks = []; // Array of tasks data
@@ -32,7 +32,7 @@ module.exports = async (
     await free(tasks.length);
     await Promise.all(
         tasks.map((t) =>
-            task({cache, reporter, createContentDigest, ...t}, pluginOption),
+            task({cache, reporter, ...t}, pluginOption),
         ),
     );
     await close();

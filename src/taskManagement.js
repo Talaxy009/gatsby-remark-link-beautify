@@ -113,7 +113,7 @@ const task = async (data, options) => {
         WSE_LIST[Math.floor(Math.random() * WSE_LIST.length)];
     const browser = await puppeteer.connect({browserWSEndpoint});
 
-    const {node, url, createContentDigest} = data;
+    const {node, url} = data;
     const name = uniqueSlug(url);
     let html;
 
@@ -143,7 +143,7 @@ const task = async (data, options) => {
 
         html = getCardHTML(meta, options.showFavicon);
     } else {
-        const file = buildImg(url, createContentDigest);
+        const file = buildImg(url);
         const screenshot = {
             success: true, // Whether the screenshot was successfully captured and saved
             file,

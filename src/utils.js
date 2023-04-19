@@ -1,3 +1,4 @@
+const {createContentDigest} = require('gatsby-core-utils');
 const uniqueSlug = require('unique-slug');
 const path = require('path');
 const fs = require('fs');
@@ -64,10 +65,9 @@ const getUrlString = (url) => {
 /**
  * build image file object
  * @param {string} url website url
- * @param {Function} createContentDigest contentDigest builder
  * @returns file object
  */
-const buildImg = (url, createContentDigest) => {
+const buildImg = (url) => {
     const name = uniqueSlug(url);
     const contentDigest = createContentDigest(url);
     const extension = 'jpg';
