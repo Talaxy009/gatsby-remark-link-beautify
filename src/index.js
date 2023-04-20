@@ -35,7 +35,6 @@ module.exports = async (
             task({cache, reporter, ...t}, pluginOption),
         ),
     );
-    await close();
 
     return markdownAST;
 };

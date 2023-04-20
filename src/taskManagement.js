@@ -40,7 +40,7 @@ const init = async (options) => {
 };
 
 /**
- * Close all browser if there are no task running
+ * [Deprecated] Close all browser if there are no task running
  */
 const close = async () => {
     // If there are no more taskgroups running, reset global variables
