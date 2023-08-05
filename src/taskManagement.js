@@ -33,7 +33,7 @@ const init = async (options) => {
     global.LINK_BEAUTIFY_IMG = setImgMap(); // Images' map
     global.LINK_BEAUTIFY_CARD = new Map(); // Cards' map
     while (WSE_LIST.length < num) {
-        const browser = await puppeteer.launch({args});
+        const browser = await puppeteer.launch({headless: 'new', args});
         WSE_LIST.push(browser.wsEndpoint());
     }
     emitter.emit('linkBeautifyInit');
