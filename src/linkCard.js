@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const {fetchData, getDataValue} = require('./utils');
+const {fetchData, getDataValue, getHostnameFromUrl} = require('./utils');
 
 /**
  * get page data from url by puppeteer
@@ -13,7 +13,7 @@ const getPageData = async (page, data, options) => {
     const {url, reporter} = data;
     const Default = {
         success: false,
-        title: options.error.title,
+        title: getHostnameFromUrl(url) ?? options.error.title,
         description: '',
         favicon: '',
         icon: url + 'favicon.ico',

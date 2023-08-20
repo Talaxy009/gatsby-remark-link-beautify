@@ -58,7 +58,20 @@ const getUrlString = (url) => {
     try {
         return new URL(urlString).toString();
     } catch (error) {
-        return null;
+        return '';
+    }
+};
+
+/**
+ * get hostname from url
+ * @param {string} url url string to be parsed
+ * @returns hostname string
+ */
+const getHostnameFromUrl = (url) => {
+    try {
+        return new URL(url).hostname;
+    } catch (error) {
+        return '';
     }
 };
 
@@ -101,6 +114,7 @@ module.exports = {
     isValidLink,
     isLinkCard,
     getUrlString,
+    getHostnameFromUrl,
     buildImg,
     setImgMap,
 };
