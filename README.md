@@ -11,7 +11,7 @@ A gatsby plugin to beautify links by previewing them.
 This plugin has two main features:
 
 - It adds a screenshot of the link's target page to the link's tooltip. When hovering over the link it will show the screenshot.
-- It embeds card with the link's target website information in the page. It only does this in the situation [below](#LinkCard).
+- It embeds card with the link's target website information in the page. It only does this in the situation [below](#linkcard).
 
 The example below are using the `twitter-card` themes.
 
@@ -29,11 +29,13 @@ or
 yarn add gatsby-remark-link-beautify
 ```
 
-This plugin requires `gatsby-transformer-remark`.
+This plugin requires `gatsby-transformer-remark` or `gatsby-plugin-mdx`.
 
 ## 🔦 Usage
 
 1. Enable the plugin in your gatsby-config.js
+
+    If you're using `gatsby-transformer-remark`:
 
     ```js
     // In your gatsby-config.js
@@ -56,6 +58,43 @@ This plugin requires `gatsby-transformer-remark`.
             resolve: `gatsby-transformer-remark`,
             options: {
                 plugins: [
+                    {
+                        resolve: `gatsby-remark-link-beautify`,
+                        options: {
+                            // your options here
+                        },
+                    },
+                ],
+            },
+        },
+    ];
+    ```
+
+    If you're using `gatsby-plugin-mdx`:
+
+    ```js
+    // In your gatsby-config.js
+    plugins: [
+        {
+            resolve: `gatsby-plugin-mdx`,
+            options: {
+                gatsbyRemarkPlugins: [
+                    `gatsby-remark-link-beautify`
+                ],
+            },
+        },
+    ];
+    ```
+
+    or
+
+    ```js
+    // In your gatsby-config.js
+    plugins: [
+        {
+            resolve: `gatsby-plugin-mdx`,
+            options: {
+                gatsbyRemarkPlugins: [
                     {
                         resolve: `gatsby-remark-link-beautify`,
                         options: {

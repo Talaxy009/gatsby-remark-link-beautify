@@ -11,7 +11,7 @@
 本插件主要有两个功能：
 
 - 它可以将目标页面的截图添加到链接的提示中。当把鼠标悬停在链接上时，它将显示该截图。
-- 它可以在页面中嵌入了带有目标网站信息的卡片。它只在 [下面](#LinkCard) 的情况下这样做。
+- 它可以在页面中嵌入了带有目标网站信息的卡片。它只在 [下面](#生成卡片) 的情况下这样做。
 
 下面的示例使用了 `twitter-card` 主题。
 
@@ -29,11 +29,13 @@ npm install gatsby-remark-link-beautify
 yarn add gatsby-remark-link-beautify
 ```
 
-另外，本插件依赖 `gatsby-transformer-remark`。
+另外，本插件依赖 `gatsby-transformer-remark` 或 `gatsby-plugin-mdx`。
 
 ## 🔦 使用方法
 
 1. 修改你的 gatsby-config.js 文件以启用本插件
+
+    如果你用的是 `gatsby-transformer-remark` 则：
 
     ```js
     // 你的 gatsby-config.js
@@ -56,6 +58,43 @@ yarn add gatsby-remark-link-beautify
             resolve: `gatsby-transformer-remark`,
             options: {
                 plugins: [
+                    {
+                        resolve: `gatsby-remark-link-beautify`,
+                        options: {
+                            // 你的插件配置
+                        },
+                    },
+                ],
+            },
+        },
+    ];
+    ```
+
+    如果你用的是 `gatsby-plugin-mdx` 则：
+
+    ```js
+    // 你的 gatsby-config.js
+    plugins: [
+        {
+            resolve: `gatsby-plugin-mdx`,
+            options: {
+                gatsbyRemarkPlugins: [
+                    `gatsby-remark-link-beautify`
+                ],
+            },
+        },
+    ];
+    ```
+
+    或
+
+    ```js
+    // 你的 gatsby-config.js
+    plugins: [
+        {
+            resolve: `gatsby-plugin-mdx`,
+            options: {
+                gatsbyRemarkPlugins: [
                     {
                         resolve: `gatsby-remark-link-beautify`,
                         options: {
