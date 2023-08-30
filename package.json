@@ -34,8 +34,7 @@
     "unist-util-visit": "^2.0.3"
   },
   "peerDependencies": {
-    "gatsby-plugin-sharp": ">=4.0.0",
-    "gatsby-transformer-remark": ">=5.0.0"
+    "gatsby-plugin-sharp": ">=4.0.0"
   },
   "devDependencies": {
     "gatsby-core-utils": "^4.11.0",
