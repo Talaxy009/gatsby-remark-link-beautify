@@ -29,15 +29,15 @@
   },
   "homepage": "https://github.com/Talaxy009/gatsby-remark-link-beautify#readme",
   "dependencies": {
-    "puppeteer": "^21.1.0",
+    "puppeteer": "^22.7.1",
     "unique-slug": "^4.0.0",
     "unist-util-visit": "^2.0.3"
   },
   "peerDependencies": {
-    "gatsby-plugin-sharp": ">=4.0.0"
+    "gatsby-plugin-sharp": ">=5.0.0"
   },
   "devDependencies": {
-    "gatsby-core-utils": "^4.11.0",
-    "gatsby-plugin-sharp": "^5.11.0"
+    "gatsby-core-utils": "^4.13.1",
+    "gatsby-plugin-sharp": "^5.13.1"
   }
 }
