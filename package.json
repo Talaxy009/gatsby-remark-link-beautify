@@ -1,12 +1,13 @@
 {
   "name": "gatsby-remark-link-beautify",
-  "version": "2.3.0-beta.2",
+  "version": "2.3.0",
   "description": "A gatsby plugin to beautify links by previewing them",
   "main": "src/index.js",
   "scripts": {
     "link": "yarn link",
     "unlink": "yarn unlink",
-    "publish": "yarn npm publish"
+    "publish": "yarn npm publish",
+    "publish:beta": "yarn npm publish --tag=beta"
   },
   "repository": {
     "type": "git",
