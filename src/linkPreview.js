@@ -13,7 +13,13 @@ const getPageScreenshot = async (page, file, data, options) => {
     const {url, reporter} = data;
 
     try {
-        await page.goto(url, {timeout: options.timeout, waitUntil: 'load'});
+        const response = await page.goto(url, {
+            timeout: options.timeout,
+            waitUntil: 'load',
+        });
+        if (response && response.status() === 404) {
+            reporter.warn(`link-beautify: Page ${url} 404 not found`);
+        }
         await page.screenshot({path: file.absolutePath});
 
         return true;
