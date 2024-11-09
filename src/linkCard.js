@@ -13,7 +13,7 @@ const getPageData = async (page, data, options) => {
     const {url, reporter} = data;
     const Default = {
         success: false,
-        title: getHostnameFromUrl(url) ?? options.error.title,
+        title: getHostnameFromUrl(url) || options.error.title,
         description: '',
         favicon: '',
         icon: url + 'favicon.ico',
