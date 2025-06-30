@@ -1,6 +1,6 @@
 const visit = require('unist-util-visit');
 const {isValidLink, isLinkCard, getUrlString} = require('./utils');
-const {init, free, task, close} = require('./taskManagement');
+const {init, free, task} = require('./taskManagement');
 
 require('events').setMaxListeners(0);
 
