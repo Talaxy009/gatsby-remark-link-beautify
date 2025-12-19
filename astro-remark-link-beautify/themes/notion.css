@@ -42,7 +42,7 @@
 }
 
 .link-card-container:hover {
-    background-color: rgba(55, 53,47, 0.08);
+    background-color: rgba(55, 53, 47, 0.08);
 }
 
 .link-card-wrapper {
@@ -51,7 +51,7 @@
     flex: 4 1 180px;
     padding: 12px 14px;
     min-height: 60px;
-    min-width:0
+    min-width: 0;
 }
 
 .link-card-title {
