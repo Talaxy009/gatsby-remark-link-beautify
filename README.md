@@ -6,6 +6,8 @@ A gatsby plugin to beautify links by previewing them.
 
 [中文文档](https://github.com/Talaxy009/gatsby-remark-link-beautify/blob/main/README-zh.md)
 
+> **Looking for Astro?** Check out [astro-remark-link-beautify](./astro-remark-link-beautify) for Astro-compatible version.
+
 ## ✨ Features
 
 This plugin has two main features:

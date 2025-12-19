@@ -6,6 +6,8 @@
 
 [English Version](https://github.com/Talaxy009/gatsby-remark-link-beautify/blob/main/README.md)
 
+> **使用 Astro？** 请查看 [astro-remark-link-beautify](./astro-remark-link-beautify) 以获取 Astro 兼容版本。
+
 ## ✨ 功能
 
 本插件主要有两个功能：

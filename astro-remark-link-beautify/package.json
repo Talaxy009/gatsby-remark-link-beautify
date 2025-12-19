@@ -1,0 +1,43 @@
+{
+  "name": "astro-remark-link-beautify",
+  "version": "1.0.0",
+  "description": "An Astro remark plugin to beautify links by previewing them",
+  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./themes/*": "./themes/*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Talaxy009/gatsby-remark-link-beautify.git"
+  },
+  "keywords": [
+    "astro",
+    "astro-plugin",
+    "remark",
+    "link",
+    "preview",
+    "card",
+    "beautify",
+    "summary"
+  ],
+  "author": "Talaxy009",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Talaxy009/gatsby-remark-link-beautify/issues"
+  },
+  "homepage": "https://github.com/Talaxy009/gatsby-remark-link-beautify#readme",
+  "dependencies": {
+    "puppeteer": "^24.11.1",
+    "unique-slug": "^5.0.0",
+    "unist-util-visit": "^5.0.0",
+    "sharp": "^0.33.0"
+  },
+  "peerDependencies": {
+    "astro": ">=3.0.0"
+  }
+}
